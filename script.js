@@ -22,27 +22,41 @@ textarea.addEventListener("focus",()=>{
 
 form.addEventListener("submit",(e)=>{
     input.forEach(element => {
-        if (element.value == "" || element.value == null) {
-            e.preventDefault();
-            element.style.borderColor = "#e5383b";
-            let father = element.parentElement;
+        element.addEventListener("input",()=>{
+            let parent = element.parentElement;
             let icon = document.createElement("ion-icon");
-            icon.setAttribute("name","close-outline");
             icon.classList.add("warning");
-            father.appendChild(icon);
+            parent.appendChild(icon);
+            if (element.value == "" || element.value == null){
+                e.preventDefault();
+                element.style.borderColor = "#e5383b";
+                icon.setAttribute("name","alert-outline");
+                icon.style.background = "#e5383b"
+            }
+            if(element.value !== ''){
+                element.style.borderColor = "#55a630";
+                icon.setAttribute("name","checkmark-outline");
+                icon.style.background = "#55a630"
 
-            element.addEventListener("input",()=>{
-                if(element.value !== ''){
-                    element.style.borderColor = "#55a630";
-                    let icon = element.parentElement.lastChild;
-                    icon.setAttribute("name","checkmark-outline");
-                                       
-                }
-            })
+            }
+        })
+
+
+
+
+        // if (element.value == "" || element.value == null) {
+        //     e.preventDefault();
+        //     element.style.borderColor = "#e5383b";
+        //     let father = element.parentElement;
+        //     let icon = document.createElement("ion-icon");
+        //     icon.setAttribute("name","alert-outline");
+        //     icon.classList.add("warning");
+        //     father.appendChild(icon);
+
             
-        }
+            
+        // }
        
         
     });
 })
-a
